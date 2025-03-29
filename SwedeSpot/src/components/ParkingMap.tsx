@@ -1,74 +1,127 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { ParkingSpot, VehicleType } from '@/src/types';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Platform } from 'react-native';
+import { ParkingSpot, VehicleType } from '../types';
+import MapView, { Marker } from 'react-native-maps';
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 
 interface ParkingMapProps {
   selectedVehicle: VehicleType;
   parkingSpots: ParkingSpot[];
   onSpotSelected: (spot: ParkingSpot) => void;
+  initialRegion: {
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
 }
 
-export function ParkingMap({ selectedVehicle, parkingSpots, onSpotSelected }: ParkingMapProps) {
-  const [position, setPosition] = useState({
-    lat: 59.3293, // Stockholm
-    lng: 18.0686,
-  });
+const mapStyle = [
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#ffdd00",
+      },
+    ],
+  },
+  {
+    featureType: "landscape",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#ffd700",
+      },
+    ],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#ff4500",
+      },
+    ],
+  },
+  {
+    featureType: "poi",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#4169e1",
+      },
+    ],
+  },
+  {
+    featureType: "transit",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#228b22",
+      },
+    ],
+  },
+];
 
-  const mapRef = useRef(null);
+export function ParkingMap({ selectedVehicle, parkingSpots, onSpotSelected, initialRegion }: ParkingMapProps) {
+  const [region, setRegion] = useState(initialRegion);
+  const [isZooming, setIsZooming] = useState(false);
 
   useEffect(() => {
-    // TODO: Implement real-time location updates
-    // This is just a placeholder
-    const timer = setInterval(() => {
-      setPosition(prev => ({
-        ...prev,
-        lat: prev.lat + 0.0001,
-      }));
-    }, 10000);
-
-    return () => clearInterval(timer);
-  }, []);
+    // First show the whole city
+    setRegion({
+      ...initialRegion,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
+    });
+    
+    // Then zoom in after a short delay
+    setTimeout(() => {
+      setIsZooming(true);
+      setRegion(initialRegion);
+    }, 1000);
+  }, [initialRegion]);
 
   return (
     <View style={styles.container}>
-      <MapContainer
-        ref={mapRef}
-        center={position}
-        zoom={12}
+      <MapView
+        provider={PROVIDER_GOOGLE}
         style={styles.map}
-        scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        region={region}
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+        showsCompass={true}
+        showsScale={true}
+        zoomEnabled={true}
+        rotateEnabled={true}
+        scrollEnabled={true}
+        pitchEnabled={true}
+        showsTraffic={true}
+        showsBuildings={true}
+        showsIndoors={true}
+        showsPointsOfInterest={true}
+        showsIndoorLevelPicker={true}
+      >
         {parkingSpots.map((spot) => (
           <Marker
             key={spot.id}
-            position={spot.location}
-            icon={L.divIcon({
-              className: 'custom-marker',
-              html: `<div style="background-color: ${spot.available ? 'green' : 'red'}; width: 20px; height: 20px; border-radius: 50%;"></div>`,
-              iconSize: [20, 20],
-            })}
-            eventHandlers={{
-              click: () => onSpotSelected(spot),
-            }}>
-            <Popup>
-              <div style={{ textAlign: 'center' }}>
-                <h3>{spot.available ? 'Available' : 'Occupied'}</h3>
-                {spot.pricePerHour && (
-                  <p>${spot.pricePerHour}/hr</p>
-                )}
-              </div>
-            </Popup>
+            coordinate={{
+              latitude: spot.location.latitude,
+              longitude: spot.location.longitude,
+            }}
+            onPress={() => onSpotSelected(spot)}
+            pinColor={spot.available ? '#00FF00' : '#FF0000'}
+          >
+            <View style={[
+              styles.marker,
+              spot.available ? styles.markerAvailable : styles.markerOccupied,
+            ]} />
           </Marker>
         ))}
-      </MapContainer>
+      </MapView>
     </View>
   );
 }
@@ -78,7 +131,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   map: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
+  },
+  marker: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#FFD700',
+  },
+  markerAvailable: {
+    backgroundColor: '#00FF00',
+  },
+  markerOccupied: {
+    backgroundColor: '#FF0000',
   },
 });
