@@ -1,77 +1,41 @@
 {
   "expo": {
     "name": "SwedeSpot",
-    "slug": "swedespot",
+    "slug": "SwedeSpot",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "plugins": [
-      "expo-location",
-      "react-native-maps"
-    ],
-    "android": {
-      "permissions": [
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
-      ],
-      "config": {
-        "googleMaps": {
-          "apiKey": "YOUR_ANDROID_MAPS_API_KEY"
-        }
-      }
-    },
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.k9coliving.swedespot",
-      "config": {
-        "googleMapsApiKey": "YOUR_IOS_MAPS_API_KEY"
-      },
-      "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Allow SwedeSpot to use your location to find nearby parking spots.",
-        "NSLocationAlwaysUsageDescription": "This app needs access to location when in the background to notify you about nearby parking spots.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow SwedeSpot to use your location to find nearby parking spots.",
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ]
-      },
-      "config": {
-        "googleMapsApiKey": "YOUR_IOS_API_KEY_HERE"
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.k9coliving.swedespot",
-      "permissions": [
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION"
-      ],
-      "config": {
-        "googleMaps": {
-          "apiKey": "YOUR_ANDROID_API_KEY_HERE"
-        }
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-location",
-      "react-native-maps"
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
     ],
-    "newArchEnabled": true
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

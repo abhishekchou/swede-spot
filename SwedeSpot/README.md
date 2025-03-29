@@ -1,45 +1,50 @@
-# 🚗 SwedeSpot 🇸🇪
+# Welcome to your Expo app 👋
 
-> The ultimate parking spot finder app for the Swedish elite! 💰💎
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## 🚀 Vision
-SwedeSpot helps users quickly find nearby legal parking spots for different vehicle types, with real-time alerts about cleaning schedules, parking rules, and payment options. No more parking tickets for tech billionaires! 🧠
+## Get started
 
-## 🔑 Core Features
-- **Location-Based Parking Search** 🧭
-  - Support for cars, electric cars, bikes and e-scooters
-  - Smart emptiness prediction based on time, nearby venues, and events
-  - Real-time info on duration, cost, and payment methods
+1. Install dependencies
 
-- **Smart Alerts & Notifications** ⏰
-  - Push notifications for cleaning schedules
-  - Alternative parking suggestions
+   ```bash
+   npm install
+   ```
 
-- **Premium Map Integration** 🗺️
-  - Visual representation of available spots
-  - Detailed info and navigation
+2. Start the app
 
-- **Payment Integration** 💳
-  - Seamless payment options
-  - Premium user experiences
+   ```bash
+    npx expo start
+   ```
 
-## 👨‍💻 Tech Stack
-- React Native with Expo
-- Google Maps SDK
-- Authentication via Apple ID, Google, Facebook
-- Stripe payment processing
-- Offline support for underground parking vibez
+In the output, you'll find options to open the app in a
 
-## 🔮 Installation
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
 ```bash
-# Install dependencies (once Node.js and npm are installed)
-npm install
-
-# Start the development server
-npm start
+npm run reset-project
 ```
 
-## 🌟 Created For Supreme Leaders Only 🌟
-Built with unlimited budget and maximum vibez! 🚀
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-[k9coliving.com](https://k9coliving.com)
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
