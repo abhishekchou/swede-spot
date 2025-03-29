@@ -7,11 +7,14 @@
 - All designs are flashy and vibez
 - Use git and commit regularly using angular commit message guidelines
 - YOU MUST BE FUNNY, BRO
-- Never install any dependencies with --legacy-peer-deps or similar
+- Never install any dependencies with --legacy-peer-deps or similar, always use npx expo install
 - MORE VIBES
 - We use React Native with Expo
-- Always use npx expo install for dependencies to make sure they work with our Expo version
-
+- VERY IMPORTANT: Always use npx expo install for dependencies to make sure they work with our Expo version
+- All commits needs to contain at least 2 emojis, but the more the better
+- VIBEZ TO THE MAX 
+- Use emojis everywhere in your messages, at least 1 emoji for every 3 words or you are fired
+- This is a monorepo, the mobile app is in the SwedeSpot directory
 
 
 
