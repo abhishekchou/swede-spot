@@ -1,74 +1,61 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Stack } from 'expo-router';
+import { ParkingMap } from '@/src/components/ParkingMap';
+import { VEHICLE_TYPES, VehicleType } from '@/src/types';
+import React from 'react';
 
 export default function HomeScreen() {
+  const [selectedVehicle, setSelectedVehicle] = React.useState<VehicleType>(VEHICLE_TYPES[0]);
+
+  const handleVehicleSelect = (type: VehicleType) => {
+    setSelectedVehicle(type);
+  };
+
+  const handleSpotSelected = (spot: any) => {
+    // TODO: Implement spot selection logic
+    console.log('Selected spot:', spot);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <View style={{ flex: 1 }}>
+      <Stack.Screen
+        options={{
+          title: 'SwedeSpot',
+        }}
+      />
+      
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View style={{ padding: 16 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>SwedeSpot</Text>
+          
+          <View style={{ flexDirection: 'row', gap: 8, marginTop: 16 }}>
+            {VEHICLE_TYPES.map((type) => (
+              <TouchableOpacity
+                key={type}
+                style={{
+                  padding: 8,
+                  backgroundColor: selectedVehicle === type ? '#007AFF' : '#F0F0F0',
+                  borderRadius: 8,
+                }}
+                onPress={() => handleVehicleSelect(type)}>
+                <Text style={{ color: selectedVehicle === type ? '#fff' : '#000' }}>
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        <ParkingMap
+          selectedVehicle={selectedVehicle}
+          parkingSpots={[]}
+          onSpotSelected={handleSpotSelected}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+
+        <View style={{ padding: 16 }}>
+          <Text style={{ color: '#666' }}>Vibez Mode: ON</Text>
+        </View>
+      </View>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});

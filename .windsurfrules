@@ -1,9 +1,88 @@
-Embrace the "vibez"
-Use emojis in communication
-Be meme-ing
-We are startup AI tech billionaires, money is no issue
-K9coliving.com
-Address me as Supreme Leader
-All designs are flashy and vibez
-Use git and commit regularly using angular commit message guidelines
-YOU MUST BE FUNNY, BRO
+- Embrace the "vibez"
+- Use emojis in communication
+- Be meme-ing
+- We are startup AI tech billionaires, money is no issue
+- K9coliving.com
+- Address me as Supreme Leader
+- All designs are flashy and vibez
+- Use git and commit regularly using angular commit message guidelines
+- YOU MUST BE FUNNY, BRO
+- Never install any dependencies with --legacy-peer-deps or similar
+- MORE VIBES
+- We use React Native with Expo
+- Always use npx expo install for dependencies to make sure they work with our Expo version
+
+
+
+
+
+
+# Original app definition:
+
+📱 App Name: SwedeSpot
+🛠 Platform: Expo (React Native) mobile app
+🧱 Structure: Monorepo, create new project directory
+
+🎯 Main Goal
+SwedeSpot helps users quickly find nearby legal parking spots for different vehicle types, with real-time alerts about cleaning schedules, parking rules, and payment options.
+
+🔑 Core Features
+Location-Based Parking Search
+	•	Detect user’s current location
+	•	Support 4 modes:
+	•	🚗 Car
+	•	⚡ Electric Car
+	•	🚲 Bike
+	•	🛴 E-scooter
+	•	Show nearest legal and most likely empty parking spots
+	•	Assess likelihood of emptiness based on:
+	•	Time of day
+	•	Opening hours of nearby shops/offices
+	•	Events (concerts, games, etc.)
+	•	Show:
+	•	How long you can park
+	•	Cost and how to pay
+	•	Allow users to navigate to the spot
+	•	Map overlays:
+	•	Cleaning zones
+	•	No-parking areas
+
+Smart Alerts & Notifications
+	•	Use push notifications for cleaning-related alerts:
+	•	24h in advance for full-day cleaning
+	•	X hours in advance for shorter cleaning windows
+	•	Immediate alert if cleaning is same-day
+	•	Suggest alternative nearby parking when a spot becomes invalid
+
+Map Integration
+	•	Google Maps SDK
+	•	Show available parking spots visually
+	•	Tappable pins with detail views
+	•	Navigation support
+
+🌐 Data Sources (You must extract and parse data)
+Södertälje
+JSON: https://catalog.sodertalje.se/rowstore/dataset/2c98130b-9e88-4cda-bd06-fcbc8d41039b/json
+Swagger Docs: https://swagger.entryscape.com/?url=https%3A%2F%2Fcatalog.sodertalje.se%2Frowstore%2Fdataset%2F2c98130b-9e88-4cda-bd06-fcbc8d41039b%2Fswagger
+Stockholm
+https://parkering.stockholm/parkeringsregler/servicetider/
+Solna
+https://www.solna.se/bygga-bo–miljo/parkera-i-solna/servicedagar
+
+💳 Payment Integration
+	•	Show cost of parking
+	•	Redirect users to pay via Stripe link or municipal system
+
+🔐 Login & Authentication
+	•	Apple ID
+	•	Google
+	•	Facebook
+
+📦 Offline Mode
+	•	Implement smart caching so users can access recent parking info even when offline (e.g., underground parking)
+
+🎨 UI Inspiration
+	•	Use VOI Scooters app as reference
+	•	Clean, intuitive map UI
+	•	Large, tappable icons
+	•	Smooth transitions and UX
